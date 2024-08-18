@@ -1,16 +1,33 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.print("Hello and welcome!");
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        Subject.Subjects[] subjects = Subject.Subjects.values();
+        Student[] students = new Student[5];
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        students[0] = new Student("Zlata", "Babych", "Group 11", subjects);
+        students[1] = new Student("Bodya", "Dashko", "Group 11", subjects);
+        students[2] = new Student("Alice", "Kanapalova", "Group 11", subjects);
+        students[3] = new Student("Anna", "Sokolova", "Group 11", subjects);
+        students[4] = new Student("Zina", "Chernenko", "Group 11", subjects);
+
+        for (Student student : students) {
+            P.rintln("Студент: " + student.getName() + " " + student.getSurname() + ", Група: " + student.getGroup());
+            P.rintln("Оцінки:");
+            for (Subject subject : student.getSubjects()) {
+                P.rintln(subject.getNameSubject() + ": " + subject.getMark() + (subject.isPassed() ? " (Здано)" : " (Не здано)"));
+            }
+            float averageMark = student.getAverageMark();
+            P.rintln("Середній бал: " + averageMark);
+            if (averageMark == 5.0) {
+                P.rintln("Підвищена стипендія");
+            } else if (averageMark >= 4.0) {
+                P.rintln("Звичайна стипендія");
+            } else {
+                P.rintln("Стипендія не нараховується");
+            }
+            P.rintln("");
         }
+
+        P.rintln("Найуспішніша дисципліна: " + Utils.getTheBestSubject(students));
+        P.rintln("Найуспішніший студент: " + Utils.getTheBestStudent(students).getName() + " " + Utils.getTheBestStudent(students).getSurname());
     }
 }
